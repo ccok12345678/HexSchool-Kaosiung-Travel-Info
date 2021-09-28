@@ -17,16 +17,21 @@
     <header class="header">
       <h1><a href="#">高雄旅遊資訊</a></h1>
       <select name="area" id="area" autofocus>
-        <option value="default">--請選擇行政區--</option>
+        <option value="default">- - 請選擇行政區 - -</option>
         <option value="前鎮區">前鎮區</option>
         <option value="三民區">三民區</option>
       </select>
       <div class="trendArea">
         <h3>熱門行政區</h3>
-        <button>苓雅區</button><button>三民區</button><button>新興區</button><button>鹽埕區</button>
+        <div class="btns">
+          <a class="trd1">苓雅區</a>
+          <a class="trd2">三民區</a>
+          <a class="trd3">新興區</a>
+          <a class="trd4">鹽埕區</a>
+        </div>
       </div>
     </header>
-    <div class="breakLine">
+    <div class="sprLine">
       <div class="line"></div>
       <img src="images/caret_icon.png" alt="caret_icon">
       <div class="line"></div>
@@ -35,7 +40,8 @@
       <h2>三民區</h2>
       <ul class="locationList">
         <li>
-          <header class="baner">
+          <header class="banner">
+            <img src="images/Hero.png" alt="">
             <h3>高雄願景館</h3>
             <h4>三民區</h4>
           </header>
@@ -43,11 +49,12 @@
             <div class="openhour">週二至週日10:00-18:00，每週一公休</div>
             <div class="address">高雄市三民區建國二路318號</div>
             <div class="tel">886-7-2363357</div>
+            <div class="ticket">免費參觀</div>
           </div>
-          <div class="ticket">免費參觀</div>
         </li>
         <li>
-          <header class="baner">
+          <header class="banner">
+            <img src="images/Hero.png" alt="">
             <h3>義勇寺</h3>
             <h4>三民區</h4>
           </header>
@@ -55,11 +62,12 @@
             <div class="openhour">每日04:30-21:00</div>
             <div class="address">高雄市三民區建興3巷1號 (科工館後方)</div>
             <div class="tel">886-7-3844119</div>
+            <div class="ticket"></div>
           </div>
-          <div class="ticket"></div>
         </li>
         <li>
-          <header class="baner">
+          <header class="banner">
+            <img src="images/Hero.png" alt="">
             <h3>中都愛河濕地公園</h3>
             <h4>三民區</h4>
           </header>
@@ -67,11 +75,12 @@
             <div class="openhour">全天候開放</div>
             <div class="address">高雄市三民區同盟三路與十全三路交叉處</div>
             <div class="tel">886-7-7995678</div>
+            <div class="ticket">免費參觀</div>
           </div>
-          <div class="ticket">免費參觀</div>
         </li>
         <li>
-          <header class="baner">
+          <header class="banner">
+            <img src="images/Hero.png" alt="">
             <h3>金獅湖道德院</h3>
             <h4>三民區</h4>
           </header>
@@ -79,19 +88,28 @@
             <div class="openhour">每日06:00-21:00</div>
             <div class="address">高雄市三民區鼎金1巷27號</div>
             <div class="tel">886-7-3426421</div>
+            <div class="ticket"></div>
           </div>
-          <div class="ticket"></div>
         </li>
       </ul>
       <div class="pages">
         <a href="#">← prev</a>
         <ul class="pagesList">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
         </ul>
         <a href="#">next →</a>
       </div>
     </main>
+    <div class="scrollUp">
+      <a href="#">
+        <i class="fas fa-angle-double-up"></i>
+      </a>
+    </div>
     <footer class="footer">
-      <h2>高雄旅遊網</h2>
+      <h5>高雄旅遊網</h5>
       <p>資料來源：高雄市政府</p>
     </footer>
   </div>

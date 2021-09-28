@@ -1,0 +1,223 @@
+@import 'reset';
+
+.wrap {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 1024px;
+  margin: 0 auto;
+  // background: #000;
+}
+.header {
+  background: url(../images/banner.png) no-repeat 50% 0px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 112px;
+
+  h1 a {
+    display: block;
+    color: #fff;
+    font-size: 40px;
+    letter-spacing: 3.89px;
+    margin-top: 89px;
+    margin-bottom: 96px;
+  }
+  select {
+    width: 44%;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 13px;
+    background: #ffffffb2;
+    border: 3px solid #fff;
+    margin-bottom: 107px;
+  }
+}
+.trendArea {
+  width: 78.1%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  padding: 20px ;
+  position: absolute;
+  top: 352px;
+
+  h3 {
+    font-size: 18px 26px;
+    font-weight: bold;
+    margin-bottom: 14px;
+
+  }
+  .btns {
+    display: flex;
+    justify-content: space-evenly
+  }
+  a {
+    color: #fff;
+    font-size: 20px;
+    padding: 11px 35px;
+    border-radius: 5px;
+    border: none;
+  }
+  a:hover {
+    background: rgba(0, 219, 11, 0.644);
+  }
+  .trd1 {
+    background: #8a82cc;
+  }
+  .trd2 {
+    background: #ffa782;
+  }
+  .trd3 {
+    background: #f5d005;
+  }
+  .trd4 {
+    background: #559ac8;
+  }
+}  
+.sprLine {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .line {
+    border-top: 2px dashed #559ac8bb;
+    height: 0px;
+    width: 45%;
+  }
+  img {
+    width: 24px;
+    height: 24px;
+    margin: 3px;
+  }
+}
+.content {
+  padding-top: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    font-size: 36px;
+    color: #8a82cc;
+    margin-bottom: 24px;
+  }
+}
+.locationList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 44px;
+
+  li {
+    width: 45.3%;
+    margin-bottom: 36px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  
+    .banner {
+      position: relative;
+
+      h3 {
+        color: #fff;
+        font-size: 24px;
+        position: absolute;
+        top: 75.4%;
+        left: 5%;
+      }
+      h4 {
+        font-size: 16px;
+        color: #fff;
+        position: absolute;
+        top: 80.6%;
+        right: 5%;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 56.7%;
+    }
+  }
+  .locationInfo {
+    padding: 22px 26px;
+    position: relative;
+
+  }
+  .openhour, .address, .tel {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  .ticket {
+    position: absolute;
+    top: 66%;
+    left: 75%;
+  }
+  .openhour::before {
+    content: url(../images/icons_clock.png);
+    margin-right: 9px;
+  }
+  .address::before {
+    content: url(../images/icons_pin.png);
+    margin-right: 9px;
+  }
+  .tel::before {
+    content: url(../images/icons_phone.png);
+    margin-right: 9px;
+  }
+  .ticket::before {
+    content: url(../images/icons_tag.png);
+    margin-right: 9px;
+  }
+}
+.pages {
+  display: flex;
+  font-size: 14px;
+  margin-bottom: 39px;
+  
+  > a {
+    margin: 4px 26.5px;
+    color: #4a4a4aff;
+  }
+  .pagesList {
+    display: flex;
+
+    a {
+      display: block;
+      width: 24px;
+      height: 24px;
+      margin: 4px;
+      color: #4a4a4aff;
+    }
+  }
+  a:hover {
+    color: #559ac8;
+  }
+}
+.scrollUp {
+  a {
+    position: fixed;
+    right: 28px;
+    bottom: 180px;
+    padding: 8px 10px;
+    background: #559ac8aa;
+    color: #fff;
+  }
+  a:hover {
+    background: #559ac8;
+  }
+  
+} 
+.footer {
+  background: #559ac8;
+  text-align: center;
+  font-size: 14px;
+  padding: 24px;
+
+  h5 {
+    color: #fff;
+    margin-bottom: 15px;
+  }
+  p {
+    color: #ffd366;
+  }
+}
