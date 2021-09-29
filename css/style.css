@@ -259,25 +259,34 @@ a {
 
 .pages {
   display: flex;
+  align-items: center;
   font-size: 14px;
   margin-bottom: 39px;
 }
 .pages > a {
-  margin: 4px 26.5px;
+  padding: 4px;
+  margin: 0px 22.5px;
   color: #4a4a4aff;
 }
 .pages .pagesList {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .pages .pagesList a {
   display: block;
-  width: 24px;
-  height: 24px;
-  margin: 4px;
+  padding: 10px;
   color: #4a4a4aff;
+}
+.pages .pagesList .presentPage {
+  color: red;
 }
 .pages a:hover {
   color: #559ac8;
+}
+
+.hide {
+  display: none;
 }
 
 .scrollTop {

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const pageNum = document.querySelector('.js_pageNumber');
   pageNum.addEventListener('click', (e) => {
-    scrollToTop(e);
+    scrollToTop(e, 350);
     const pn = e.target;
     pageNumber(pn);
   } )
@@ -100,34 +100,42 @@ function createList(area) {
     </li>`;
     
     const items = 6;
-    if (i + 1 === items || (i + 1) % items === 0) {
+    if ((i + 1) % items === 0) {
       landscapeList.push(str);
       str = '';
       continue;
     } 
   }
-  landscapeList.push(str);
+  if (str !== '') {
+    landscapeList.push(str);
+  }
   return landscapeList;
 }
 
-function renderPage(selected = 'default', page = 0) {
+function renderPage(selected = 'default', page = 1) {
   const locationList = document.querySelector('.js_locationList');
   const title = document.querySelector('.js_areaTitle');
   const pageNumber = document.querySelector('.js_pageNumber');
+  const pages = document.querySelector('.js_pages');
   
   const area = (selected === 'default') ? '全部景點' : selected;
   title.innerHTML = area;
   
   const pageList = createList(selected);
-  locationList.innerHTML = pageList[page];
+  locationList.innerHTML = pageList[page -1];
   
   const len = pageList.length;
   let p = '';
   if (len === 1) {
-    pageNumber.style.display = 'none';
+    pages.setAttribute('class', 'pages js_pages hide');
   } else {
+    pages.setAttribute('class','pages js_pages');
     for (let i = 1; i <= len; i++) {
-      p += `<li><a href="#" data-page="${i - 1}" data-area="${selected}">${i}</a></li>`;
+      if (i === page) {
+        p += `<li><a class="presentPage" data-page="${i}" data-area="${selected}">${i}</a></li>`;
+        continue;
+      }
+      p += `<li><a href="#" data-page="${i}" data-area="${selected}">${i}</a></li>`;
     }
     pageNumber.innerHTML = p;
   }
@@ -149,7 +157,6 @@ function pageNumber(p) {
   renderPage(area , page);
 }
 
-
 // scroll top with jQuery
 function showBtn() {
   if($(this).scrollTop() > 300) {
@@ -159,10 +166,10 @@ function showBtn() {
   }
 }
 
-function scrollToTop(e) {
+function scrollToTop(e, pin = 0) {
   e.preventDefault();
   $('body, html').animate({
-    scrollTop: 0
+    scrollTop: pin
   }, 300);
 }
 
