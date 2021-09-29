@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
     showTrendArea(btn);
   }, false);
 
+  const pageNum = document.querySelector('.js_pageNumber');
+  pageNum.addEventListener('click', (e) => {
+    scrollToTop(e);
+    const pn = e.target;
+    pageNumber(pn);
+  } )
+  
+
   window.addEventListener('scroll', showBtn, false);
   const scrollBtn = document.querySelector('.scrollTop');
   scrollBtn.addEventListener('click', scrollToTop, false);
@@ -66,7 +74,7 @@ function landscapeFilter(area) {
 function createList(area) {
   const ls = landscapeFilter(area);
   const len = ls.length;
-
+  
   let ticket = '';
   let str ='';
   let landscapeList = [];
@@ -76,22 +84,23 @@ function createList(area) {
     } else {
       ticket = '';
     }
-
+    
     str += `
     <li>
-      <header class="banner" style="background:url(${ls[i].Picture1})center;">
-        <h3>${ls[i].Name}</h3>
-        <h4>${area}</h4>
-      </header>
-      <div class="locationInfo">
-        <div class="openhour">${ls[i].Opentime}</div>
-        <div class="address">${ls[i].Add}</div>
-        <div class="tel"><a href="tel:${ls[i].Tel}">+${ls[i].Tel}</a></div>
-        <div class="ticket">${ticket}</div>
-      </div>
+    <header class="banner" style="background:url(${ls[i].Picture1})center;">
+    <h3>${ls[i].Name}</h3>
+    <h4>${area}</h4>
+    </header>
+    <div class="locationInfo">
+    <div class="openhour">${ls[i].Opentime}</div>
+    <div class="address">${ls[i].Add}</div>
+    <div class="tel"><a href="tel:${ls[i].Tel}">+${ls[i].Tel}</a></div>
+    <div class="ticket">${ticket}</div>
+    </div>
     </li>`;
-
-    if (i + 1 === 6 || (i + 1) % 6 === 0) {
+    
+    const items = 6;
+    if (i + 1 === items || (i + 1) % items === 0) {
       landscapeList.push(str);
       str = '';
       continue;
@@ -101,24 +110,28 @@ function createList(area) {
   return landscapeList;
 }
 
-function renderPage(selected = 'default') {
+function renderPage(selected = 'default', page = 0) {
   const locationList = document.querySelector('.js_locationList');
   const title = document.querySelector('.js_areaTitle');
   const pageNumber = document.querySelector('.js_pageNumber');
   
   const area = (selected === 'default') ? '全部景點' : selected;
   title.innerHTML = area;
-
+  
   const pageList = createList(selected);
-  locationList.innerHTML = pageList[0];
-
+  locationList.innerHTML = pageList[page];
+  
   const len = pageList.length;
   let p = '';
-  for (let i = 1; i <= len; i++) {
-    p += `<li><a href="#">${i}</a></li>`;
+  if (len === 1) {
+    pageNumber.style.display = 'none';
+  } else {
+    for (let i = 1; i <= len; i++) {
+      p += `<li><a href="#" data-page="${i - 1}" data-area="${selected}">${i}</a></li>`;
+    }
+    pageNumber.innerHTML = p;
   }
-  pageNumber.innerHTML = p;
-
+  
   hideLoadingAni();
 }
 
@@ -127,6 +140,15 @@ function showTrendArea(btn) {
   const trend = btn.getAttribute('data-trend');
   renderPage(trend);
 }
+
+// page number
+function pageNumber(p) {
+  if (p.nodeName !== 'A') return;
+  const area = p.getAttribute('data-area');
+  const page = Number(p.getAttribute('data-page'));
+  renderPage(area , page);
+}
+
 
 // scroll top with jQuery
 function showBtn() {
