@@ -11,23 +11,24 @@
   <title>高雄雄旅遊景點</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/all.js"></script>
 </head>
 <body>
   <div class="wrap">
     <header class="header">
       <h1><a href="#">高雄旅遊資訊</a></h1>
       <select name="area" id="area" autofocus>
-        <option value="default">- - 請選擇行政區 - -</option>
-        <option value="前鎮區">前鎮區</option>
-        <option value="三民區">三民區</option>
+       
+        <!-- <option value="前鎮區">前鎮區</option>
+        <option value="三民區">三民區</option> -->
       </select>
       <div class="trendArea">
         <h3>熱門行政區</h3>
         <div class="btns">
-          <a class="trd1">苓雅區</a>
-          <a class="trd2">三民區</a>
-          <a class="trd3">新興區</a>
-          <a class="trd4">鹽埕區</a>
+          <a class="trd1" data-trend="苓雅區">苓雅區</a>
+          <a class="trd2" data-trend="三民區">三民區</a>
+          <a class="trd3" data-trend="新興區">新興區</a>
+          <a class="trd4" data-trend="鹽埕區">鹽埕區</a>
         </div>
       </div>
     </header>
@@ -37,9 +38,8 @@
       <div class="line"></div>
     </div>
     <main class="content">
-      <h2>三民區</h2>
-      <ul class="locationList">
-        <li>
+      <h2 class="js_areaTitle"></h2>
+      <ul class="locationList js_locationList">
           <header class="banner">
             <img src="images/Hero.png" alt="">
             <h3>高雄願景館</h3>
@@ -90,7 +90,7 @@
             <div class="tel">886-7-3426421</div>
             <div class="ticket"></div>
           </div>
-        </li>
+        </li> -->
       </ul>
       <div class="pages">
         <a href="#">← prev</a>

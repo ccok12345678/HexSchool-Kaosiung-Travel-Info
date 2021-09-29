@@ -116,7 +116,9 @@
   
     .banner {
       position: relative;
-
+      height: 155px;
+      width: 464px;
+      
       h3 {
         color: #fff;
         font-size: 24px;
@@ -131,12 +133,9 @@
         top: 80.6%;
         right: 5%;
       }
+      
     }
 
-    img {
-      width: 100%;
-      height: 56.7%;
-    }
   }
   .locationInfo {
     padding: 22px 26px;
