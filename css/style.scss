@@ -122,6 +122,7 @@
   100% { transform: rotate(360deg); }
 }
 .locationList {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -135,7 +136,7 @@
     .banner {
       position: relative;
       height: 155px;
-      width: 464px;
+      width: 100%;
       
       h3 {
         color: #fff;
@@ -174,6 +175,12 @@
     position: absolute;
     top: 66%;
     left: 75%;
+  }
+  a {
+    color: #000;
+  }
+  a:hover {
+    text-decoration: underline;
   }
   .openhour::before {
     content: url(../images/icons_clock.png);

@@ -185,6 +185,7 @@ a {
   }
 }
 .locationList {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -198,7 +199,7 @@ a {
 .locationList li .banner {
   position: relative;
   height: 155px;
-  width: 464px;
+  width: 100%;
 }
 .locationList li .banner h3 {
   color: #fff;
@@ -232,6 +233,12 @@ a {
   position: absolute;
   top: 66%;
   left: 75%;
+}
+.locationList a {
+  color: #000;
+}
+.locationList a:hover {
+  text-decoration: underline;
 }
 .locationList .openhour::before {
   content: url(../images/icons_clock.png);

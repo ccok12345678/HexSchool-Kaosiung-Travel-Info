@@ -7,11 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const selectArea = document.querySelector('#area');
   selectArea.addEventListener('change', () => {
     const area = document.querySelector('#area').value;
-    renderList(area);
+    renderPage(area);
   }, false);
 
   const trendArea = document.querySelector('.js_trendArea');
   trendArea.addEventListener('click', (e) => {
+    e.preventDefault()
     const btn = e.target;
     showTrendArea(btn);
   }, false);
@@ -34,7 +35,7 @@ xhr.addEventListener('load', () => {
   const arr = JSON.parse(str);
   landscapes = arr['data']['XML_Head']['Infos']['Info'];
   
-  renderList();
+  renderPage();
 });
 
 function init() {
@@ -62,17 +63,13 @@ function landscapeFilter(area) {
 }
 
 // render content
-function renderList(selected = 'default') {
-  const locationList = document.querySelector('.js_locationList');
-  const title = document.querySelector('.js_areaTitle');
-  const ls = landscapeFilter(selected);
+function createList(area) {
+  const ls = landscapeFilter(area);
   const len = ls.length;
-  
-  const area = (selected === 'default') ? '全部景點' : selected;
-  title.innerHTML = area;
 
   let ticket = '';
   let str ='';
+  let landscapeList = [];
   for (let i = 0; i < len; i++) {
     if (ls[i].Ticketinfo === '') {
       ticket = '免費參觀';
@@ -82,19 +79,45 @@ function renderList(selected = 'default') {
 
     str += `
     <li>
-    <header class="banner" style="background:url(${ls[i].Picture1})center;">
-      <h3>${ls[i].Name}</h3>
-      <h4>${area}</h4>
-    </header>
-    <div class="locationInfo">
-      <div class="openhour">${ls[i].Opentime}</div>
-      <div class="address">${ls[i].Add}</div>
-      <div class="tel">${ls[i].Tel}</div>
-      <div class="ticket">${ticket}</div>
-    </div>
-  </li>`;
+      <header class="banner" style="background:url(${ls[i].Picture1})center;">
+        <h3>${ls[i].Name}</h3>
+        <h4>${area}</h4>
+      </header>
+      <div class="locationInfo">
+        <div class="openhour">${ls[i].Opentime}</div>
+        <div class="address">${ls[i].Add}</div>
+        <div class="tel"><a href="tel:${ls[i].Tel}">+${ls[i].Tel}</a></div>
+        <div class="ticket">${ticket}</div>
+      </div>
+    </li>`;
+
+    if (i + 1 === 6 || (i + 1) % 6 === 0) {
+      landscapeList.push(str);
+      str = '';
+      continue;
+    } 
   }
-  locationList.innerHTML = str;
+  landscapeList.push(str);
+  return landscapeList;
+}
+
+function renderPage(selected = 'default') {
+  const locationList = document.querySelector('.js_locationList');
+  const title = document.querySelector('.js_areaTitle');
+  const pageNumber = document.querySelector('.js_pageNumber');
+  
+  const area = (selected === 'default') ? '全部景點' : selected;
+  title.innerHTML = area;
+
+  const pageList = createList(selected);
+  locationList.innerHTML = pageList[0];
+
+  const len = pageList.length;
+  let p = '';
+  for (let i = 1; i <= len; i++) {
+    p += `<li><a href="#">${i}</a></li>`;
+  }
+  pageNumber.innerHTML = p;
 
   hideLoadingAni();
 }
@@ -102,7 +125,7 @@ function renderList(selected = 'default') {
 function showTrendArea(btn) {
   if (btn.nodeName !== 'A') return;
   const trend = btn.getAttribute('data-trend');
-  renderList(trend);
+  renderPage(trend);
 }
 
 // scroll top with jQuery
