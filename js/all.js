@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
 });
 
+
 // XHR
 const xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://api.kcg.gov.tw/api/service/get/9c8e1450-e833-499c-8320-29b36b7ace5c', true);
@@ -67,7 +68,7 @@ function renderList(selected = 'default') {
   const ls = landscapeFilter(selected);
   const len = ls.length;
   
-  const area = (selected === 'default') ? '高雄景點' : selected;
+  const area = (selected === 'default') ? '全部景點' : selected;
   title.innerHTML = area;
 
   let ticket = '';
@@ -94,6 +95,8 @@ function renderList(selected = 'default') {
   </li>`;
   }
   locationList.innerHTML = str;
+
+  hideLoadingAni();
 }
 
 function showTrendArea(btn) {
@@ -116,4 +119,10 @@ function scrollToTop(e) {
   $('body, html').animate({
     scrollTop: 0
   }, 300);
+}
+
+// loading animate 
+function hideLoadingAni() {
+  const loader = document.querySelector('.js_loader');
+  loader.style.display = 'none';
 }
