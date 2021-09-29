@@ -11,18 +11,15 @@
   <title>高雄雄旅遊景點</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="js/all.js"></script>
 </head>
 <body>
   <div class="wrap">
     <header class="header">
       <h1><a href="#">高雄旅遊資訊</a></h1>
-      <select name="area" id="area" autofocus>
-       
-        <!-- <option value="前鎮區">前鎮區</option>
-        <option value="三民區">三民區</option> -->
-      </select>
-      <div class="trendArea">
+      <select name="area" id="area" autofocus></select>
+      <div class="trendArea js_trendArea">
         <h3>熱門行政區</h3>
         <div class="btns">
           <a class="trd1" data-trend="苓雅區">苓雅區</a>
@@ -103,8 +100,8 @@
         <a href="#">next →</a>
       </div>
     </main>
-    <div class="scrollUp">
-      <a href="#">
+    <div class="scrollTop">
+      <a href="#" title="回到頂部">
         <i class="fas fa-angle-double-up"></i>
       </a>
     </div>

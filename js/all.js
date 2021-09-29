@@ -1,11 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
+  
   // init
   init();
   
   // eventListeners
   const selectArea = document.querySelector('#area');
-  selectArea.addEventListener('change', renderList, false);
-  
+  selectArea.addEventListener('change', () => {
+    const area = document.querySelector('#area').value;
+    renderList(area);
+  }, false);
+
+  const trendArea = document.querySelector('.js_trendArea');
+  trendArea.addEventListener('click', (e) => {
+    const btn = e.target;
+    showTrendArea(btn);
+  }, false);
+
+  window.addEventListener('scroll', showBtn, false);
+  const scrollBtn = document.querySelector('.scrollTop');
+  scrollBtn.addEventListener('click', scrollToTop, false);
   
 });
 
@@ -40,22 +53,21 @@ function areaList() {
   list.innerHTML = '<option value="default">- - 請選擇行政區 - -</option>' + str;
 }
 
-function landscapeFilter() {
-  const selected = document.querySelector('#area').value;
-  if (selected === 'default') return landscapes;
-  const area = new RegExp(selected);
+function landscapeFilter(area) {
+  if (area === 'default') return landscapes;
+  area = new RegExp(area);
   const place = landscapes.filter(item => area.test(item.Add));
   return place;
 }
 
-function renderList() {
-  const selected = document.querySelector('#area').value;
+// render content
+function renderList(selected = 'default') {
   const locationList = document.querySelector('.js_locationList');
   const title = document.querySelector('.js_areaTitle');
-  const ls = landscapeFilter();
+  const ls = landscapeFilter(selected);
   const len = ls.length;
-
-  const area = (selected === 'default') ? '高雄景點' : `${selected}`;
+  
+  const area = (selected === 'default') ? '高雄景點' : selected;
   title.innerHTML = area;
 
   let ticket = '';
@@ -84,6 +96,24 @@ function renderList() {
   locationList.innerHTML = str;
 }
 
-function showTrendArea(e) {
-  const area = e.target.getAttribute('data-trend');
+function showTrendArea(btn) {
+  if (btn.nodeName !== 'A') return;
+  const trend = btn.getAttribute('data-trend');
+  renderList(trend);
+}
+
+// scroll top with jQuery
+function showBtn() {
+  if($(this).scrollTop() > 300) {
+    $('.scrollTop').fadeIn();
+  } else {
+    $('.scrollTop').fadeOut();
+  }
+}
+
+function scrollToTop(e) {
+  e.preventDefault();
+  $('body, html').animate({
+    scrollTop: 0
+  }, 300);
 }

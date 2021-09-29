@@ -192,7 +192,9 @@
     color: #559ac8;
   }
 }
-.scrollUp {
+.scrollTop {
+  display: none;
+
   a {
     position: fixed;
     right: 28px;

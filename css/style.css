@@ -241,7 +241,10 @@ a {
   color: #559ac8;
 }
 
-.scrollUp a {
+.scrollTop {
+  display: none;
+}
+.scrollTop a {
   position: fixed;
   right: 28px;
   bottom: 180px;
@@ -249,7 +252,7 @@ a {
   background: #559ac8aa;
   color: #fff;
 }
-.scrollUp a:hover {
+.scrollTop a:hover {
   background: #559ac8;
 }
 
