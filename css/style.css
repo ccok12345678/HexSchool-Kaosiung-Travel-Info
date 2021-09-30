@@ -268,12 +268,17 @@ a {
   margin: 0px 22.5px;
   color: #4a4a4aff;
 }
+.pages > font {
+  padding: 4px;
+  margin: 0px 22.5px;
+  color: #4a4a4a80;
+}
 .pages .pagesList {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-.pages .pagesList a {
+.pages .pagesList a, .pages .pagesList font {
   display: block;
   padding: 10px;
   color: #4a4a4aff;

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showTrendArea(btn);
   }, false);
 
-  const pageNum = document.querySelector('.js_pageNumber');
+  const pageNum = document.querySelector('.js_pages');
   pageNum.addEventListener('click', (e) => {
     scrollToTop(e, 350);
     const pn = e.target;
@@ -40,8 +40,8 @@ xhr.send();
 let landscapes = [];
 xhr.addEventListener('load', () => {
   const str = xhr.responseText;
-  const arr = JSON.parse(str);
-  landscapes = arr['data']['XML_Head']['Infos']['Info'];
+  const obj = JSON.parse(str);
+  landscapes = obj['data']['XML_Head']['Infos']['Info'];
   
   renderPage();
 });
@@ -70,7 +70,7 @@ function landscapeFilter(area) {
   return place;
 }
 
-// render content
+// create content list
 function createList(area) {
   const ls = landscapeFilter(area);
   const len = ls.length;
@@ -99,7 +99,7 @@ function createList(area) {
     </div>
     </li>`;
     
-    const items = 6;
+    const items = 10;
     if ((i + 1) % items === 0) {
       landscapeList.push(str);
       str = '';
@@ -112,6 +112,7 @@ function createList(area) {
   return landscapeList;
 }
 
+// render page number & content
 function renderPage(selected = 'default', page = 1) {
   const locationList = document.querySelector('.js_locationList');
   const title = document.querySelector('.js_areaTitle');
@@ -126,18 +127,32 @@ function renderPage(selected = 'default', page = 1) {
   
   const len = pageList.length;
   let p = '';
+  let prev ='';
+  let next = '';
   if (len === 1) {
     pages.setAttribute('class', 'pages js_pages hide');
   } else {
     pages.setAttribute('class','pages js_pages');
     for (let i = 1; i <= len; i++) {
       if (i === page) {
-        p += `<li><a class="presentPage" data-page="${i}" data-area="${selected}">${i}</a></li>`;
+        p += `<li><font class="presentPage" data-page="${i}" data-area="${selected}">${i}</font></li>`;
+        
+        if (i === 1) {
+          prev = `<font>← prev</font>`;
+          next = `<a href="#"data-page="${i + 1}" data-area="${selected}">next →</a>`;
+        } else if (i === len) {
+          prev = `<a href="#"data-page="${i - 1}" data-area="${selected}">← prev</a>`;
+          next = `<font>next →</font>`;
+        } else {
+          next = `<a href="#"data-page="${i + 1}" data-area="${selected}">next →</a>`;
+          prev = `<a href="#"data-page="${i - 1}" data-area="${selected}">← prev</a>`;
+        }
+        
         continue;
       }
       p += `<li><a href="#" data-page="${i}" data-area="${selected}">${i}</a></li>`;
     }
-    pageNumber.innerHTML = p;
+    pages.innerHTML = prev + `<ul class="pagesList js_pageNumber">${p}</ul>` + next;
   }
   
   hideLoadingAni();
@@ -149,7 +164,7 @@ function showTrendArea(btn) {
   renderPage(trend);
 }
 
-// page number
+// click page number
 function pageNumber(p) {
   if (p.nodeName !== 'A') return;
   const area = p.getAttribute('data-area');

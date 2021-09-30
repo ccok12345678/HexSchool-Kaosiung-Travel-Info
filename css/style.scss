@@ -205,17 +205,22 @@
   font-size: 14px;
   margin-bottom: 39px;
   
-   > a {
+  > a {
     padding: 4px;
     margin: 0px 22.5px;
     color: #4a4a4aff;
+  }
+  > font {
+    padding: 4px;
+    margin: 0px 22.5px;
+    color: #4a4a4a80;
   }
   .pagesList {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
-    a {
+    a, font {
       display: block;
       padding: 10px;
       color: #4a4a4aff;
