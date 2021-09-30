@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollToTop(e, 350);
     const pn = e.target;
     pageNumber(pn);
-  } )
+  }, false )
   
 
   window.addEventListener('scroll', showBtn, false);
@@ -50,7 +50,7 @@ function init() {
   areaList();
 }
 
-// area list
+// area list for select
 function areaList() {
   const list = document.querySelector('#area');
   const areas = ['楠梓區', '左營區' ,'鼓山區' ,'鹽埕區' ,'三民區', '前金區', '新興區', '苓雅區', '前鎮區', '小港區', '旗津區', '鳳山區', '鳥松區', '仁武區', '大社區', '大樹區', '大寮區', '林園區', '岡山區', '橋頭區', '路竹區', '燕巢區', '阿蓮區', '田寮區', '梓官區', '彌陀區', '永安區', '湖內區', '茄萣區', '旗山區', '美濃區', '內門區', '杉林區', '甲仙區', '六龜區', '那瑪夏區', '桃源區', '茂林區'];
@@ -60,14 +60,8 @@ function areaList() {
   for (let i = 0; i < len; i++) {
     str += `<option value="${areas[i]}">${areas[i]}</option>`;
   }
-  list.innerHTML = '<option value="default">- - 請選擇行政區 - -</option>' + str;
-}
-
-function landscapeFilter(area) {
-  if (area === 'default') return landscapes;
-  area = new RegExp(area);
-  const place = landscapes.filter(item => area.test(item.Add));
-  return place;
+  const defaulT = '<option value="default">- - 請選擇行政區 - -</option><option value="default">全部景點</option>';
+  list.innerHTML = defaulT + str;
 }
 
 // create content list
@@ -112,11 +106,17 @@ function createList(area) {
   return landscapeList;
 }
 
-// render page number & content
+function landscapeFilter(area) {
+  if (area === 'default') return landscapes;
+  area = new RegExp(area);
+  const places = landscapes.filter(item => area.test(item.Add));
+  return places;
+}
+
+// render content & page number
 function renderPage(selected = 'default', page = 1) {
   const locationList = document.querySelector('.js_locationList');
   const title = document.querySelector('.js_areaTitle');
-  const pageNumber = document.querySelector('.js_pageNumber');
   const pages = document.querySelector('.js_pages');
   
   const area = (selected === 'default') ? '全部景點' : selected;
@@ -158,19 +158,20 @@ function renderPage(selected = 'default', page = 1) {
   hideLoadingAni();
 }
 
-function showTrendArea(btn) {
-  if (btn.nodeName !== 'A') return;
-  const trend = btn.getAttribute('data-trend');
-  renderPage(trend);
-}
-
-// click page number
+// page number clicked
 function pageNumber(p) {
   if (p.nodeName !== 'A') return;
   const area = p.getAttribute('data-area');
   const page = Number(p.getAttribute('data-page'));
   renderPage(area , page);
 }
+
+function showTrendArea(btn) {
+  if (btn.nodeName !== 'A') return;
+  const trend = btn.getAttribute('data-trend');
+  renderPage(trend);
+}
+
 
 // scroll top with jQuery
 function showBtn() {
