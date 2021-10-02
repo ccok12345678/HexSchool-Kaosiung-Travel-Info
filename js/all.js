@@ -71,7 +71,7 @@ function createList(area) {
   
   let ticket = '';
   let str ='';
-  let landscapeList = [];
+  const landscapeList = [];
   for (let i = 0; i < len; i++) {
     if (ls[i].Ticketinfo === '') {
       ticket = '免費參觀';
