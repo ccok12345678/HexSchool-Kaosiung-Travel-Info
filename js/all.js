@@ -55,12 +55,9 @@ function areaList() {
   const list = document.querySelector('#area');
   const areas = ['楠梓區', '左營區' ,'鼓山區' ,'鹽埕區' ,'三民區', '前金區', '新興區', '苓雅區', '前鎮區', '小港區', '旗津區', '鳳山區', '鳥松區', '仁武區', '大社區', '大樹區', '大寮區', '林園區', '岡山區', '橋頭區', '路竹區', '燕巢區', '阿蓮區', '田寮區', '梓官區', '彌陀區', '永安區', '湖內區', '茄萣區', '旗山區', '美濃區', '內門區', '杉林區', '甲仙區', '六龜區', '那瑪夏區', '桃源區', '茂林區'];
   
-  let str = '';
-  const len = areas.length;
-  for (let i = 0; i < len; i++) {
-    str += `<option value="${areas[i]}">${areas[i]}</option>`;
-  }
-  const defaulT = '<option value="default">- - 請選擇行政區 - -</option><option value="default">全部景點</option>';
+  const str = areas.map(x => `<option value="${x}">${x}</option>` );
+
+  const defaulT = '<option disabled>- - 請選擇行政區 - -</option><option value="default">全部景點</option>';
   list.innerHTML = defaulT + str;
 }
 
@@ -68,6 +65,7 @@ function areaList() {
 function createList(area) {
   const ls = landscapeFilter(area);
   const len = ls.length;
+  area = (area === 'default') ? '高雄' : area;
   
   let ticket = '';
   let str ='';
@@ -93,8 +91,8 @@ function createList(area) {
     </div>
     </li>`;
     
-    const items = 10;
-    if ((i + 1) % items === 0) {
+    const itemNum = 10;
+    if ((i + 1) % itemNum === 0) {
       landscapeList.push(str);
       str = '';
       continue;
@@ -117,22 +115,32 @@ function landscapeFilter(area) {
 function renderPage(selected = 'default', page = 1) {
   const locationList = document.querySelector('.js_locationList');
   const title = document.querySelector('.js_areaTitle');
-  const pages = document.querySelector('.js_pages');
+  const pagination = document.querySelector('.js_pages');
   
   const area = (selected === 'default') ? '全部景點' : selected;
   title.innerHTML = area;
   
   const pageList = createList(selected);
   locationList.innerHTML = pageList[page -1];
-  
+
+  const pageNum = createPageNum(selected, page);
+  pagination.innerHTML = pageNum;
+   
+  hideLoadingAni();
+}
+
+function createPageNum(selected, page) {
+  const pageList = createList(selected);
   const len = pageList.length;
+  const pagination = document.querySelector('.js_pages');
+
   let p = '';
   let prev ='';
   let next = '';
   if (len === 1) {
-    pages.setAttribute('class', 'pages js_pages hide');
+    pagination.setAttribute('class', 'pages js_pages hide');
   } else {
-    pages.setAttribute('class','pages js_pages');
+    pagination.setAttribute('class','pages js_pages');
     for (let i = 1; i <= len; i++) {
       if (i === page) {
         p += `<li><font class="presentPage" data-page="${i}" data-area="${selected}">${i}</font></li>`;
@@ -152,10 +160,9 @@ function renderPage(selected = 'default', page = 1) {
       }
       p += `<li><a href="#" data-page="${i}" data-area="${selected}">${i}</a></li>`;
     }
-    pages.innerHTML = prev + `<ul class="pagesList js_pageNumber">${p}</ul>` + next;
+    pageNum = prev + `<ul class="pagesList js_pageNumber">${p}</ul>` + next;
   }
-  
-  hideLoadingAni();
+  return pageNum;
 }
 
 // page number clicked
@@ -169,6 +176,8 @@ function pageNumber(p) {
 function showTrendArea(btn) {
   if (btn.nodeName !== 'A') return;
   const trend = btn.getAttribute('data-trend');
+  const area = document.querySelector('#area');
+  area.value = trend;
   renderPage(trend);
 }
 
